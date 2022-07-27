@@ -4,8 +4,13 @@ import { environment } from '../../environments/environment';
 import { map, Observable } from 'rxjs';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'Authorization': sessionStorage.getItem('token')! 
+
+    })
 };
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +31,10 @@ export class SystemapiService {
     sessionStorage.setItem("isLoggedIn",value);
   }
 
+  setToken(token:string){
+    sessionStorage.setItem("token",token);
+  }
+
   getUserId(){
     return sessionStorage.getItem("userId");
   }
@@ -35,9 +44,13 @@ export class SystemapiService {
   getUserLoggedIn(){
     return sessionStorage.getItem("isLoggedIn");
   }
+  getToken(){
+    return sessionStorage.getItem("token");
+  }
 
+  //#region  Method   
 
-  getMovieCatalog(){
+  getMovieCatalog(){    
     return this.httpClient.get(`${environment.apiUrl}api/MovieCatalog/GetMovieCatalog`,httpOptions);
   }
 
@@ -51,4 +64,7 @@ export class SystemapiService {
         return model;
     }));
   }
+  //#endregion
+
+  
 }

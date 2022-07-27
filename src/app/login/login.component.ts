@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    debugger;
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -53,9 +52,9 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
         this.response = res;
           if(this.response.status == 1){
-            debugger;
             this.systemApi.setUser(this.response.data.user)
             this.systemApi.setUserId(this.response.data.user.id)
+            this.systemApi.setToken(this.response.data.token)
             this.router.navigate(['/MovieCatalog']);
           }
           else{

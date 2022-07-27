@@ -22,6 +22,10 @@ export class SystemapiService {
     sessionStorage.setItem("currentUser",JSON.stringify(User));
   }
 
+  setIsLoggedIn(value:string){
+    sessionStorage.setItem("isLoggedIn",value);
+  }
+
   getUserId(){
     return sessionStorage.getItem("userId");
   }
